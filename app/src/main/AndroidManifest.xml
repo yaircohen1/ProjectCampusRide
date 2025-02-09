@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -21,7 +28,7 @@
             </intent-filter>
         </service>
         <activity
-            android:name=".view.MainMenuActivity"
+            android:name=".view.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +44,9 @@
         <activity android:name=".view.CreateRideActivity"/>
         <activity android:name=".view.DriverRidesActivity"/>
         <activity android:name=".view.PassengerMainActivity"/>
+        <activity android:name=".view.MainMenuActivity"/>
+        <activity android:name=".view.MyRidesActivity"/>
+        <activity android:name=".RateDriverActivity"/>
         <activity android:name=".view.SearchRideActivity"/>
         <activity android:name=".view.SignUp"/>
 
