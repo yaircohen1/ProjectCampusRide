@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -109,7 +108,7 @@ public class SearchRideActivity extends AppCompatActivity {
                     progressDialog.setMessage("Sending request...");
                     progressDialog.show();
 
-                    passengerController.requestToJoinRide(ride.getRideId(), passenger, ride.getDriverId(),ride.getDriverName(),ride.getDate(), ride.getTime(), ride.getStartLocation(),ride.getEndLocation())
+                    passengerController.requestToJoinRide(ride.getRideId(), passenger, ride.getDriverId(),ride.getDriverName(),ride.getRideDate(), ride.getRideTime(), ride.getStartLocation(),ride.getEndLocation())
                             .addOnSuccessListener(requestId -> {
                                 progressDialog.dismiss();
                                 showToast("Successfully sent request! ID: " + requestId);
