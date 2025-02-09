@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="israel_cities">
+        <item>אום אל-פחם</item>
+        <item>אופקים</item>
+        <item>אור יהודה</item>
+        <item>אור עקיבא</item>
+        <item>אילת</item>
+        <item>אלעד</item>
+        <item>אריאל</item>
+        <item>אשדוד</item>
+        <item>אשקלון</item>
+        <item>באקה אל-גרבייה</item>
+        <item>באר שבע</item>
+        <item>בית שאן</item>
+        <item>בית שמש</item>
+        <item>ביתר עילית</item>
+        <item>בני ברק</item>
+        <item>בת ים</item>
+        <item>גבעת שמואל</item>
+        <item>גבעתיים</item>
+        <item>דימונה</item>
+        <item>הוד השרון</item>
+        <item>הרצליה</item>
+        <item>חדרה</item>
+        <item>חולון</item>
+        <item>חיפה</item>
+        <item>טבריה</item>
+        <item>טייבה</item>
+        <item>טירה</item>
+        <item>טירת כרמל</item>
+        <item>טמרה</item>
+        <item>יבנה</item>
+        <item>יהוד-מונוסון</item>
+        <item>יקנעם עילית</item>
+        <item>ירושלים</item>
+        <item>כפר יונה</item>
+        <item>כפר סבא</item>
+        <item>כפר קאסם</item>
+        <item>כרמיאל</item>
+        <item>לוד</item>
+        <item>מגדל העמק</item>
+        <item>מודיעין-מכבים-רעות</item>
+        <item>מודיעין עילית</item>
+        <item>מעלה אדומים</item>
+        <item>מעלות-תרשיחא</item>
+        <item>נהריה</item>
+        <item>נוף הגליל</item>
+        <item>נס ציונה</item>
+        <item>נצרת</item>
+        <item>נשר</item>
+        <item>נתיבות</item>
+        <item>נתניה</item>
+        <item>סחנין</item>
+        <item>עכו</item>
+        <item>עפולה</item>
+        <item>עראבה</item>
+        <item>ערד</item>
+        <item>פתח תקווה</item>
+        <item>צפת</item>
+        <item>קלנסווה</item>
+        <item>קריית אונו</item>
+        <item>קריית אתא</item>
+        <item>קריית ביאליק</item>
+        <item>קריית גת</item>
+        <item>קריית ים</item>
+        <item>קריית מוצקין</item>
+        <item>קריית מלאכי</item>
+        <item>קריית שמונה</item>
+        <item>ראש העין</item>
+        <item>ראשון לציון</item>
+        <item>רהט</item>
+        <item>רחובות</item>
+        <item>רמלה</item>
+        <item>רמת גן</item>
+        <item>רמת השרון</item>
+        <item>רעננה</item>
+        <item>שדרות</item>
+        <item>שפרעם</item>
+        <item>תל אביב-יפו</item>
+    </string-array>
+</resources>
