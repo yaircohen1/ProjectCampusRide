@@ -96,7 +96,7 @@ public class Ride {
         this.endLocation = endLocation;
     }
 
-    public String getDate() {
+    public String getRideDate() {
         return rideDate;
     }
 
@@ -104,7 +104,7 @@ public class Ride {
         this.rideDate = rideDate;
     }
 
-    public String getTime() {
+    public String getRideTime() {
         return rideTime;
     }
 
