@@ -34,6 +34,8 @@
         <activity android:name=".view.NotificationsActivity"/>
         <activity android:name=".view.ProfileActivity"/>
         <activity android:name=".view.DriverMainActivity"/>
+        <activity android:name=".view.CreateRideActivity"/>
+        <activity android:name=".view.DriverRidesActivity"/>
         <activity android:name=".view.PassengerMainActivity"/>
         <activity android:name=".view.SearchRideActivity"/>
         <activity android:name=".view.SignUp"/>
