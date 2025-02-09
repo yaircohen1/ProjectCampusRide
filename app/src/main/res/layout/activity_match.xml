@@ -2,31 +2,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".view.MainActivity"
     android:background="@android:color/white">
 
     <!-- Top Bar -->
     <LinearLayout
-        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="end"
-        android:padding="8dp"
-        android:background="#E0E0E0">
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
 
-        <ImageView
-            android:id="@+id/settingsIcon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@android:drawable/ic_menu_preferences"
-            android:layout_marginEnd="16dp" />
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="חזור"
+            android:src="@android:drawable/ic_menu_revert" />
 
-        <ImageView
-            android:id="@+id/notificationIcon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+        <ImageButton
+            android:id="@+id/notification_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="התראות"
             android:src="@android:drawable/ic_popup_reminder" />
+
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="הגדרות"
+            android:src="@android:drawable/ic_menu_manage" />
     </LinearLayout>
 
     <!-- Buttons in the middle -->
@@ -45,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="הצג מספר נהג"
-            android:background="#2E6C9E"
+            android:backgroundTint="@color/light_green"
             android:textColor="@android:color/white" />
 
         <Button
@@ -54,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="תשלום בביט"
-            android:background="#2E6C9E"
+            android:backgroundTint="@color/light_green"
             android:textColor="@android:color/white" />
 
         <Button
@@ -63,18 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="דרג נהג"
-            android:background="#2E6C9E"
+            android:backgroundTint="@color/light_green"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
-    <!-- Back Button at the Bottom -->
-    <Button
-        android:id="@+id/previousScreenButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:text="חזרה לחלון קודם"
-        android:background="#2E6C9E"
-        android:textColor="@android:color/white" />
 </RelativeLayout>

@@ -5,19 +5,66 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center">
+    android:gravity="start|center_horizontal"> <!-- למרכז את כל התוכן בהגדרה הכללית -->
 
-    <Button
-        android:id="@+id/my_p_rides_button"
+    <!-- כפתורים למעלה (חזור, הגדרות, התראות) -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="הנסיעות שלי"
-        android:layout_marginBottom="10dp" />
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
 
-    <Button
-        android:id="@+id/search_ride_button"
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="חזור"
+            android:src="@android:drawable/ic_menu_revert" />
+
+        <ImageButton
+            android:id="@+id/notification_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="התראות"
+            android:src="@android:drawable/ic_popup_reminder" />
+
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="הגדרות"
+            android:src="@android:drawable/ic_menu_manage" />
+    </LinearLayout>
+
+    <!-- כפתורים במרכז (הנסיעות שלי, צור נסיעה חדשה) -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="חפש נסיעה חדשה"
-        android:layout_marginBottom="10dp"/>
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/my_rides_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="הנסיעות שלי"
+            android:backgroundTint="@color/light_green"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/create_ride_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="חפש נסיעה"
+            android:backgroundTint="@color/light_green"
+            android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+
 </LinearLayout>

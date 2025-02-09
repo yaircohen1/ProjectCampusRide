@@ -12,28 +12,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="end"
+        android:orientation="horizontal"
         android:layout_marginBottom="16dp">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="חזור"
+            android:src="@android:drawable/ic_menu_revert" />
 
         <ImageButton
             android:id="@+id/notification_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@android:drawable/ic_popup_reminder"
-            android:contentDescription="התראות"
+            android:layout_marginStart="8dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:layout_marginStart="8dp"/>
+            android:contentDescription="התראות"
+            android:src="@android:drawable/ic_popup_reminder" />
 
         <ImageButton
             android:id="@+id/settings_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@android:drawable/ic_menu_manage"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:contentDescription="הגדרות"
-            android:background="?android:attr/selectableItemBackgroundBorderless"/>
-
+            android:src="@android:drawable/ic_menu_manage" />
     </LinearLayout>
+
 
     <EditText
         android:id="@+id/start_location_edit"
@@ -68,6 +77,7 @@
         android:text="חיפוש נסיעות"
         android:textDirection="anyRtl"
         android:gravity="center"
+        android:backgroundTint="@color/light_green"
         android:onClick="onSearchRideClicked" />
 
     <ProgressBar

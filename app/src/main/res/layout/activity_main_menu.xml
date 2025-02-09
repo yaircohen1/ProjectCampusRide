@@ -4,47 +4,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="start"
     android:padding="16dp"
     android:background="#E6F1F8">
 
-    <!-- Logo Image -->
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="321dp"
-        android:layout_height="204dp"
-        android:layout_marginBottom="32dp"
-        android:contentDescription="CampusRide Logo"
-        android:src="@drawable/campusride_logo" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="חזור"
+            android:src="@android:drawable/ic_menu_revert" />
+
+        <ImageButton
+            android:id="@+id/notification_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="התראות"
+            android:src="@android:drawable/ic_popup_reminder" />
+
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="הגדרות"
+            android:src="@android:drawable/ic_menu_manage" />
+    </LinearLayout>
+
+    <!-- Logo Image - Centered -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="32dp">
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="327dp"
+            android:layout_height="204dp"
+            android:contentDescription="CampusRide Logo"
+            android:src="@drawable/campusride_logo" />
+    </LinearLayout>
 
     <!-- Profile Button -->
     <Button
         android:id="@+id/btn_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profile"
+        android:text="פרופיל"
         android:layout_marginBottom="16dp"
-        android:background="#3D5A80"
+        android:backgroundTint="@color/light_green"
         android:textColor="#FFFFFF" />
 
     <!-- I'm the Driver Button -->
     <Button
-        android:id="@+id/driver_button"
+        android:id="@+id/btn_driver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="אני נהג"
+        android:text="נהג"
         android:layout_marginBottom="16dp"
-        android:background="#3D5A80"
+        android:backgroundTint="@color/light_green"
         android:textColor="#FFFFFF" />
 
     <!-- I'm Searching for a Ride Button -->
     <Button
-        android:id="@+id/passenger_button"
+        android:id="@+id/btn_search_ride"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="אני נוסע"
+        android:text="נוסע"
         android:layout_marginBottom="16dp"
-        android:background="#3D5A80"
+        android:backgroundTint="@color/light_green"
         android:textColor="#FFFFFF" />
 
     <!-- Log Out Button -->
@@ -52,15 +91,16 @@
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LogOut"
-        android:background="#3D5A80"
+        android:text="התנתק"
+        android:backgroundTint="@color/light_green"
         android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/btn_notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notifications"
+        android:text="התראות"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/light_green"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
