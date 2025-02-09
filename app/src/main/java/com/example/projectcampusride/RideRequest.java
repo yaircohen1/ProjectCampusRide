@@ -20,7 +20,7 @@ public class RideRequest implements Serializable {
     protected Date requestTime;
     protected Status status;
     protected static RideManager instance;
-    protected List<Ride> rides;
+
     protected List<RideRequest> rideRequests;
 
     public RideRequest(String tripId, Passenger passenger) {
@@ -42,7 +42,7 @@ public class RideRequest implements Serializable {
     public void reject() { this.status = Status.REJECTED; }
 
     private void TripManager() {
-        this.rides = new ArrayList<>();
+
         this.rideRequests = new ArrayList<>();
     }
 
@@ -58,39 +58,5 @@ public class RideRequest implements Serializable {
         RideRequest newRequest = new RideRequest(tripId, passenger);
         rideRequests.add(newRequest);
     }
-
-    public void approveRequest(String requestId) {
-        for (RideRequest request : rideRequests) {
-            if (request.getId().equals(requestId)) {
-                request.approve();
-                // מצא את הנסיעה המתאימה והוסף את הנוסע
-                for (Ride ride : rides) {
-                    if (ride.getId().equals(request.getTripId())) {
-                        ride.addPassenger(request.passenger);
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-    }
-
-    public void rejectRequest(String requestId) {
-        rideRequests.removeIf(request -> request.getId().equals(requestId));
-    }
-
-    public List<RideRequest> getTripRequestsForDriver(String driverName) {
-        return rideRequests.stream()
-                .filter(request -> {
-                    // מצא את הנסיעה של הנהג
-                    for (Ride ride : rides) {
-                        if (ride.getId().equals(request.getTripId()) &&
-                                ride.getDriverName().equals(driverName)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                })
-                .collect(Collectors.toList());
-    }
 }
+

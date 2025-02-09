@@ -53,7 +53,7 @@ public class RideAdapter extends ArrayAdapter<Ride> {
 
             driverNameView.setText("שם הנהג: " + ride.getDriverName());
             startEndLocation.setText(ride.getStartLocation() + " ← " + ride.getEndLocation());
-            RideDateTime.setText(ride.getDate() + "  " + ride.getTime());
+            RideDateTime.setText(ride.getRideDate() + "  " + ride.getRideTime());
             availableSeats.setText("מקומות פנויים: " + ride.getAvailableSeats());
             price.setText(String.format("%.2f ₪", ride.getPrice()));
 

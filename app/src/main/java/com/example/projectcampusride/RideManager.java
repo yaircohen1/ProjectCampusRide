@@ -237,19 +237,5 @@ public class RideManager {
 //    }
 
     // Helper method to convert Firestore document to Ride object
-    private Ride documentToRide(DocumentSnapshot doc) {
-        String driverName = doc.getString("driverName");
-        String startLocation = doc.getString("startLocation");
-        String endLocation = doc.getString("endLocation");
-        Long seats = doc.getLong("availableSeats");
-        Double price = doc.getDouble("price");
-        String id = doc.getString("id");
 
-        if (driverName == null || startLocation == null || endLocation == null ||
-                seats == null || price == null) {
-            return null;
-        }
-
-        return new Ride(driverName, startLocation, endLocation, seats.intValue(), price);
-    }
 }
