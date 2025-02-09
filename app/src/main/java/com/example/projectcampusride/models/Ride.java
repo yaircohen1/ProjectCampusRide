@@ -1,7 +1,9 @@
 package com.example.projectcampusride.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.firebase.Timestamp;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Ride {
     private String rideId;
@@ -13,11 +15,17 @@ public class Ride {
     private String rideTime;
     private int availableSeats;
     private double price;
-    private RideStatus status;
-    private List<String> passengers;
+    private String status;  // נשמור את RideStatus כ-String
+    private Map<String, String> passengers;
+    private Timestamp createdAt; // נוסיף את createdAt
 
-    public Ride(String rideId, String driverId, String driverName , String startLocation, String endLocation,
-                String rideDate, String rideTime, int availableSeats, double price, RideStatus status) {
+    public Ride() {
+        // Constructor ללא פרמטרים – חובה לשימוש עם Firestore
+
+    }
+
+    public Ride(String rideId, String driverId, String driverName, String startLocation, String endLocation,
+                String rideDate, String rideTime, int availableSeats, double price, String status, Timestamp createdAt) {
         this.rideId = rideId;
         this.driverId = driverId;
         this.driverName = driverName;
@@ -27,45 +35,123 @@ public class Ride {
         this.rideTime = rideTime;
         this.availableSeats = availableSeats;
         this.price = price;
-        this.status = status != null ? status : RideStatus.ACTIVE;
-        this.passengers = new ArrayList<>();
+        this.status = status != null ? status : "ACTIVE";
+        this.createdAt = createdAt;
+        this.passengers = passengers != null ? passengers : new HashMap<>();
     }
 
-    // Getters & Setters
-    public String getRideId() { return rideId; }
-    public String getDriverId() { return driverId; }
-    public String getDriverName() { return driverName; }
-    public String getStartLocation() { return startLocation; }
-    public String getEndLocation() { return endLocation; }
-    public String getDate() { return rideDate; }
-    public String getTime() { return rideTime; }
-    public int getAvailableSeats() { return availableSeats; }
-    public double getPrice() { return price; }
-    public RideStatus getStatus() { return status; }
-    public List<String> getPassengers() { return new ArrayList<>(passengers); }
+    public Ride(String rideId, String driverId, String driverName, String startLocation, String endLocation, String rideDate, String rideTime, int i, double price, RideStatus rideStatus) {
+        this.rideId = rideId;
+        this.driverId = driverId;
+        this.driverName = driverName;
+        this.startLocation = startLocation;
+        this.endLocation = endLocation;
+        this.rideDate = rideDate;
+        this.rideTime = rideTime;
+        this.price = price;
+        this.status = status != null ? status : "ACTIVE";
+        this.passengers = new HashMap<>();
 
-    public void setRideId(String rideId) { this.rideId = rideId; }
+    }
 
-    public void setStatus(RideStatus status) { this.status = status; }
+    // Getters ו-Setters לכל השדות
 
+    public String getRideId() {
+        return rideId;
+    }
 
-    public void addPassenger(String passengerId) { passengers.add(passengerId); }
-    public void removePassenger(String passengerId) { passengers.remove(passengerId); }
+    public void setRideId(String rideId) {
+        this.rideId = rideId;
+    }
 
-    @Override
-    public String toString() {
-        return "Ride { " +
-                "ID='" + rideId + '\'' +
-                ", Driver='" + driverId + '\'' +
-                ", From='" + startLocation + '\'' +
-                ", To='" + endLocation + '\'' +
-                ", Date='" + rideDate + '\'' +
-                ", Time='" + rideTime + '\'' +
-                ", Available Seats=" + availableSeats +
-                ", Price=" + price +
-                ", Status='" + status + '\'' +
-                '}';
+    public String getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
+    }
+
+    public String getStartLocation() {
+        return startLocation;
+    }
+
+    public void setStartLocation(String startLocation) {
+        this.startLocation = startLocation;
+    }
+
+    public String getEndLocation() {
+        return endLocation;
+    }
+
+    public void setEndLocation(String endLocation) {
+        this.endLocation = endLocation;
+    }
+
+    public String getDate() {
+        return rideDate;
+    }
+
+    public void setDate(String rideDate) {
+        this.rideDate = rideDate;
+    }
+
+    public String getTime() {
+        return rideTime;
+    }
+
+    public void setTime(String rideTime) {
+        this.rideTime = rideTime;
+    }
+
+    public int getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Map<String, String> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(Map<String, String> passengers) {
+        this.passengers = passengers;
     }
 }
+
 
 
