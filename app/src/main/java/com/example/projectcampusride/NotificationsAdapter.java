@@ -98,7 +98,7 @@ public class NotificationsAdapter extends ArrayAdapter<Map<String, Object>> {
 
                     if ("accepted".equals(status)) {
                         firestore.collection("rides")
-                                .whereEqualTo("rideId", rideId)  // חיפוש המסמך לפי rideId
+                                .whereEqualTo("rideId", rideId)
                                 .get()
                                 .addOnSuccessListener(querySnapshot -> {
                                     if (!querySnapshot.isEmpty()) {
@@ -113,6 +113,24 @@ public class NotificationsAdapter extends ArrayAdapter<Map<String, Object>> {
                                                     )
                                                     .addOnSuccessListener(a -> Log.d("RideUpdate", "Passenger added and seats updated"))
                                                     .addOnFailureListener(e -> Log.e("RideUpdate", "Failed to update ride", e));
+
+                                            // עדכון רשימת הנסיעות של הנוסע
+                                            firestore.collection("users").document(passengerId)
+                                                    .update("rides", FieldValue.arrayUnion(rideId))
+                                                    .addOnSuccessListener(a -> Log.d("UserUpdate", "Ride added to passenger's ride list"))
+                                                    .addOnFailureListener(e -> Log.e("UserUpdate", "Failed to update passenger's ride list", e));
+
+                                            // שליחת התראה לנוסע
+                                            firestore.collection("users").document(passengerId)
+                                                    .collection("notifications")
+                                                    .add(Map.of(
+                                                            "message", "✅ הבקשה שלך להצטרף לנסיעה אושרה!",
+                                                            "type", "info",
+                                                            "rideId", rideId,
+                                                            "createdAt", System.currentTimeMillis()
+                                                    ))
+                                                    .addOnSuccessListener(a -> Log.d("Notification", "Approval notification sent to passenger"))
+                                                    .addOnFailureListener(e -> Log.e("Notification", "Failed to send notification", e));
                                         }
                                     } else {
                                         Log.e("RideUpdate", "No ride found with rideId: " + rideId);
@@ -120,18 +138,8 @@ public class NotificationsAdapter extends ArrayAdapter<Map<String, Object>> {
                                 })
                                 .addOnFailureListener(e -> Log.e("RideUpdate", "Failed to query rides collection", e));
 
-                        firestore.collection("rideRequests").document(notificationId)
-                                .update("status", status)
-                                .addOnSuccessListener(a -> Log.d("RideRequest", "Ride request status updated to: " + status))
-                                .addOnFailureListener(e -> Log.e("RideRequest", "Failed to update ride request status", e));
-
                         NotificationUtils.sendRideRequestStatusNotification(passengerId, rideId, status);
                     } else if ("declined".equals(status)) {
-                        firestore.collection("rideRequests").document(notificationId)
-                                .update("status", status)
-                                .addOnSuccessListener(a -> Log.d("RideRequest", "Ride request status updated to: " + status))
-                                .addOnFailureListener(e -> Log.e("RideRequest", "Failed to update ride request status", e));
-
                         NotificationUtils.sendRideRequestStatusNotification(passengerId, rideId, status);
                     }
                 })
@@ -139,5 +147,6 @@ public class NotificationsAdapter extends ArrayAdapter<Map<String, Object>> {
                     Toast.makeText(getContext(), "Failed to update notification.", Toast.LENGTH_SHORT).show();
                 });
     }
+
 
 }
