@@ -14,7 +14,7 @@
         android:layout_marginBottom="16dp">
 
         <ImageButton
-            android:id="@+id/back_button"
+            android:id="@+id/previousScreenButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
@@ -23,7 +23,7 @@
             android:src="@android:drawable/ic_menu_revert" />
 
         <ImageButton
-            android:id="@+id/notification_button"
+            android:id="@+id/notificationIcon"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
@@ -32,7 +32,7 @@
             android:src="@android:drawable/ic_popup_reminder" />
 
         <ImageButton
-            android:id="@+id/settings_button"
+            android:id="@+id/settingsIcon"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"

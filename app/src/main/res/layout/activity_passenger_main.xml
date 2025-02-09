@@ -51,7 +51,7 @@
         android:layout_weight="1">
 
         <Button
-            android:id="@+id/my_rides_button"
+            android:id="@+id/my_p_rides_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="הנסיעות שלי"
@@ -59,7 +59,7 @@
             android:layout_marginBottom="10dp"/>
 
         <Button
-            android:id="@+id/create_ride_button"
+            android:id="@+id/search_ride_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="חפש נסיעה"

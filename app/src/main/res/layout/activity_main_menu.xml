@@ -16,7 +16,7 @@
         android:layout_marginBottom="16dp">
 
         <ImageButton
-            android:id="@+id/back_button"
+            android:id="@+id/previousScreenButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
@@ -68,7 +68,7 @@
 
     <!-- I'm the Driver Button -->
     <Button
-        android:id="@+id/btn_driver"
+        android:id="@+id/driver_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="נהג"
@@ -78,7 +78,7 @@
 
     <!-- I'm Searching for a Ride Button -->
     <Button
-        android:id="@+id/btn_search_ride"
+        android:id="@+id/passenger_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="נוסע"
