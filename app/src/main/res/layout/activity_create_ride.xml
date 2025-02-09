@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="center">
 
-
+    <!-- New horizontal layout for buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,48 +40,98 @@
             android:src="@android:drawable/ic_menu_manage"
             android:contentDescription="הגדרות"
             android:background="?android:attr/selectableItemBackgroundBorderless"/>
+
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/start_location"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="מקום יציאה" />
+        android:hint="מיקום התחלה">
+
+        <AutoCompleteTextView
+            android:id="@+id/start_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="מיקום יעד">
+
+        <AutoCompleteTextView
+            android:id="@+id/end_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
-        android:id="@+id/end_location"
+        android:id="@+id/available_seats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="יעד" />
+        android:hint="כמות מקומות פנויים"
+        android:inputType="number" />
 
     <EditText
-        android:id="@+id/date_field"
+        android:id="@+id/price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="תאריך" />
+        android:hint="מחיר לנוסע"
+        android:inputType="numberDecimal" />
 
-    <EditText
-        android:id="@+id/time_field"
+    <!-- כפתור לבחירת תאריך -->
+    <Button
+        android:id="@+id/pick_date_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="שעה" />
+        android:text="📅 בחר תאריך"
+        android:layout_marginTop="10dp" />
 
-    <EditText
-        android:id="@+id/price_field"
+    <TextView
+        android:id="@+id/selected_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="מחיר" />
-
-    <EditText
-        android:id="@+id/available_seats_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="כמות מושבים" />
+        android:text="תאריך: לא נבחר"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"/>
 
     <Button
-        android:id="@+id/submit_button"
+        android:id="@+id/pick_time_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/light_green"
-        android:text="הוסף נסיעה" />
+        android:text="⏰ בחר שעה"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/selected_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="שעה: לא נבחרה"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/create_ride_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🚗 צור נסיעה חדשה"
+        android:layout_marginTop="16dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleLarge"/>
+
 </LinearLayout>
