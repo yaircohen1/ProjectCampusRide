@@ -1,6 +1,5 @@
 package com.example.projectcampusride.repositories;
 
-import java.util.*;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -18,10 +17,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class RideRepository {
     private static final String TAG = "RideRepository";
@@ -54,7 +51,7 @@ public class RideRepository {
     public Task<Void> createRide(Ride ride) {
         String rideId = db.collection(COLLECTION_RIDES).document().getId();
 //        ride.setRideId(rideId);
-        ride.setStatus("ACTIVE");
+        //      ride.setStatus(RideStatus.fromString("ACTIVE"));
 
         Map<String, Object> rideData = new HashMap<>();
         rideData.put("rideId", ride.getRideId());
@@ -62,8 +59,8 @@ public class RideRepository {
         rideData.put("driverId", ride.getDriverId());
         rideData.put("startLocation", ride.getStartLocation());
         rideData.put("endLocation", ride.getEndLocation());
-        rideData.put("date", ride.getDate().toString());
-        rideData.put("time", ride.getTime().toString());
+        rideData.put("date", ride.getRideDate().toString());
+        rideData.put("time", ride.getRideTime().toString());
         rideData.put("availableSeats", ride.getAvailableSeats());
         rideData.put("price", ride.getPrice());
         rideData.put("passengers", new ArrayList<String>());
@@ -93,62 +90,27 @@ public class RideRepository {
                 });
     }
 
-    public void getRidesForPassenger(String passengerId, OnRidesFetchedListener listener) {
-        db.collection(COLLECTION_REQUESTS)
-                .whereEqualTo("passengerId", passengerId)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    List<Ride> passengerRides = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        Ride ride = document.toObject(Ride.class); // Convert Firestore document to Ride object
-                        passengerRides.add(ride);
-                    }
-                    listener.onSuccess(passengerRides); // Return list via callback
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("RideService", "Error fetching rides for driver", e);
-                    listener.onFailure(e);
-                });
-    }
-
-    public Task<Boolean> isDriver(String id){
-        // Get reference to the user's document in the 'users' collection
-        DocumentReference userDocRef = db.collection(COLLECTION_USERS).document(id);
-
-        // Fetch the document asynchronously
-        return userDocRef.get().continueWith(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot userDoc = task.getResult();
-                if (userDoc != null && userDoc.exists()) {
-                    // Check if the user has the role 'driver'
-                    String role = userDoc.getString("role"); // Assuming 'role' field holds the user role
-                    return "driver".equals(role); // Return true if the role is 'driver', false otherwise
-                }
-            }
-            return false; // Return false if the user is not found or the role is not 'driver'
-        });
-    }
 
 
-    //   public void searchRides(String startLocation, String endLocation) {
-    //      db.collection(COLLECTION_RIDES)
-    //               .whereEqualTo("startLocation", startLocation)
-    //              .whereEqualTo("endLocation", endLocation)
-    //              .get()
-    //              .addOnSuccessListener(queryDocumentSnapshots -> {
+ //   public void searchRides(String startLocation, String endLocation) {
+ //      db.collection(COLLECTION_RIDES)
+ //               .whereEqualTo("startLocation", startLocation)
+  //              .whereEqualTo("endLocation", endLocation)
+  //              .get()
+  //              .addOnSuccessListener(queryDocumentSnapshots -> {
 //                    showProgress(false);
-    //
-    //                  Set<Map<String, Object>> matchingRides = new HashSet<>();
-    //                  for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+ //
+  //                  Set<Map<String, Object>> matchingRides = new HashSet<>();
+  //                  for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
     //                    matchingRides.add(document.getData());
-    //                 }
-    //               updateRidesList(new ArrayList<>(matchingRides));
+   //                 }
+     //               updateRidesList(new ArrayList<>(matchingRides));
     //            })
-    //        .addOnFailureListener(e -> {
+        //        .addOnFailureListener(e -> {
 //                    showProgress(false);
 //                    showToast("Error: " + e.getMessage());
     //                Log.e(TAG, "Error searching rides", e);
-    //             });
+   //             });
 //        return db.collection(COLLECTION_RIDES)
 //                .whereEqualTo("startLocation", startLocation)
 //                .whereEqualTo("endLocation", endLocation)
@@ -166,7 +128,7 @@ public class RideRepository {
 //                    }
 //                    return results;
 //                });
-    //   }
+ //   }
 
 //    public void updateRidesList(List<Map<String, Object>> rides) {
 //        List<Ride> rideList = new ArrayList<>();
