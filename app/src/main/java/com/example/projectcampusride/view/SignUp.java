@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -104,9 +105,12 @@ public class SignUp extends AppCompatActivity {
         }
 
         btnOpenCamera.setOnClickListener(v -> {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                cameraResultLauncher.launch(takePictureIntent);
+            Log.d("Camera", "Camera button clicked");
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 100);
+                Log.d("Camera", "Requesting camera permission");
+            } else {
+                openCamera();
             }
         });
 
@@ -132,6 +136,42 @@ public class SignUp extends AppCompatActivity {
         buttonSignUp.setOnClickListener(v -> registerUser());
     }
 
+    private boolean isValidAcademicEmail(String email) {
+        return email != null && email.contains("ac.il");
+    }
+
+    private boolean hasCamera() {
+        return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+    }
+
+    private void openCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            cameraResultLauncher.launch(takePictureIntent);
+        } else {
+            Toast.makeText(this, "Camera not available", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void requestCameraPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 100);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Camera permission granted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
     private void registerUser() {
         progressBar.setVisibility(View.VISIBLE);
         String email = editTextEmail.getText().toString().trim();
@@ -139,6 +179,7 @@ public class SignUp extends AppCompatActivity {
         String fullName = editTextFullName.getText().toString().trim();
         String id = editTextID.getText().toString().trim();
         String phoneNum = editPhoneNum.getText().toString().trim();
+        String role = "passenger"; // Default role, can be updated based on user input
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(fullName) ||
                 TextUtils.isEmpty(id) || TextUtils.isEmpty(phoneNum)) {
@@ -153,10 +194,10 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
-//        if (!isValidAcademicEmail(email)) {
-//            Toast.makeText(RegisterActivity.this, "הרשמה נכשלה: יש להזין מייל מוסדי (ac.il)", Toast.LENGTH_LONG).show();
-//            return;
-//        }
+        if (!isValidAcademicEmail(email)) {
+            Toast.makeText(SignUp.this, "הרשמה נכשלה: יש להזין מייל מוסדי (ac.il)", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
@@ -175,17 +216,32 @@ public class SignUp extends AppCompatActivity {
                             userProfile.put("email", email);
                             userProfile.put("phoneNumber", phoneNum);
                             userProfile.put("id", id);
+                            userProfile.put("role", role); // Assign default role
 
-                            db.collection("users").document(user.getUid()).set(userProfile);
-                            Toast.makeText(SignUp.this, "Account created.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), Login.class));
-                            finish();
+                            // Save user data
+                            db.collection("users").document(user.getUid()).set(userProfile)
+                                    .addOnSuccessListener(aVoid -> {
+                                        // Create an empty notifications collection
+                                        db.collection("users")
+                                                .document(user.getUid())
+                                                .collection("notifications")
+                                                .document("init")
+                                                .set(new HashMap<>())
+                                                .addOnSuccessListener(aVoid1 -> Log.d("Firestore", "Notifications collection initialized"))
+                                                .addOnFailureListener(e -> Log.e("Firestore", "Failed to initialize notifications collection", e));
+
+                                        Toast.makeText(SignUp.this, "Account created.", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(), Login.class));
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e -> Toast.makeText(SignUp.this, "Failed to save user data.", Toast.LENGTH_SHORT).show());
                         }
                     } else {
                         Toast.makeText(SignUp.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
 
     private void signInGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
