@@ -60,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvId = findViewById(R.id.tv_id);
         tvPhone = findViewById(R.id.tv_phone);
         tvRating = findViewById(R.id.tv_rating);
-        btnRateDriver = findViewById(R.id.btn_rate_driver);
+
 
 
         // טיפול בלחיצה על כפתור הדירוג
